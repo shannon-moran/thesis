@@ -1,0 +1,62 @@
+This doc is meant to hold the many physics and design decisions I've made over my thesis. Eventually I will clean it up into a thesis chaper of sorts.
+
+section{Background: How true thermodynamic temperature is currently accounted for}
+In our Brownian dynamics simulations, we always account for contributions from a (white noise) equilibrium thermal bath at temperature $T$ represented by force $\eta_i(t)$, which satisfies the fluctuation-dissipation theorem (FDT, also called the Nyquist formula), $\langle\eta_i(t)\eta_j(t)\rangle=2T\delta_{ij}$.
+
+The fluctuation-dissipation theorem says that when there is a process that dissipates energy, turning it into heat (e.g., friction), there is a reverse process related to thermal fluctuations. This is best understood by considering some examples: (wikipedia)
+
+Drag and Brownian motion
+If an object is moving through a fluid, it experiences drag (air resistance or fluid resistance). Drag dissipates kinetic energy, turning it into heat. The corresponding fluctuation is Brownian motion. An object in a fluid does not sit still, but rather moves around with a small and rapidly-changing velocity, as molecules in the fluid bump into it. Brownian motion converts heat energy into kinetic energy?the reverse of drag. (wikipedia)
+
+In a system of Brownian particles with no active forces, stochastic thermal forces are the only means of particle motion. In the limit of $T\rightarrow0$, the agents do not move (and in our active systems, the only influences on their motion are the active driving force and collisions). In the limit of $T\rightarrow\infty$, the influence of the gradients of the field is almost negligible; hence, agents do not turn to order motion among the nodes, and a network does not occur either. In our active systems, a system with infinite $T$... \cite{Schweitzer_2003}
+
+Particle dynamics may be regarded as an over-damped Langevin dynamics in the low-Reynolds number regime. Mass $m$ is assumed to be negligible such that the translational dynamics for each particle $i$ are given by:
+\begin{equation} \label{eq:langevin}
+\begin{aligned}
+\frac{d\x}{dt} = 0 &= -\gamma_T\frac{d\x}{dt} + F_\text{sp}(t)\vv_\text{sp}(t) + \sum_{j \neq i} \F_{ij}(t) + \F_\text{random,T}(t)
+\end{aligned}
+\end{equation}
+Here, $\gamma_T$ is the friction coefficient and $\vv_\text{sp}(t)$ is the direction of the active force. We assume solvent is implicit in this formulation via $\gamma_T$ (treated as a parameterization of solvent viscosity in the literature) and the stochastic force $\F_\text{random}$. The forces on each particle are given by:
+\begin{equation}
+\begin{aligned}
+F_\text{sp}(t)\vv_\text{sp}(t) &= \text{self-propelled (``active'') force} \\
+\sum_{j \neq i} \F_{ij}(t) &= \text{force from inter-particle interactions} \\
+\F_\text{random,T}(t) &= \text{random Brownian noise, translational}
+\end{aligned}
+\end{equation}
+
+In our simulations, the rotational Langevin is analogous to the translational form above, with torques $\T_{ij}$ in place of $\F_{ij}$, no rotational velocity, and a separate noise term.
+
+In the literature, the active force of a self-propelled particle is commonly viewed as a component of the system's dimensionless velocity, given by the active P{\'e}clet number.
+\begin{equation}
+\Pe = v_p\frac{\tau_T}{\sigma} = \frac{\text{``ballistic energy''}}{\text{``thermal energy''}} = \frac{F_\text{sp}\sigma}{k_BT}
+\end{equation}
+
+We see that if Pe is small, diffusion is important, while if Pe is large, directed motion prevails. Thus, we expect to see activity-mediated phenomena at higher Peclet numbers. For our simulations, we set $k_BT=1$ then calculate $F_\text{sp}$ from the Pe set point under study.\footnote{Work out of Michael Cates' group points out that increasing the $F_\text{sp}$ as a means of achieving the desired P{\'e}clet number causes the effective radius of a shape to decrease at high Pe numbers. This occurs because the radius at which the active and repulsive forces balance out will decrease for a constant $\F_\text{random}$ and increasing $F_\text{sp}$, all else being equal. They calculate that the effective rounding radius is decreased by 15\% at Pe=300 in a 3D system \cite{Stenhammar_2014_SoftMatter}. As the typical active 2D parameter space only goes up to Pe=140, the effect of this in our systems should be minimal. However, Suma et al also argue that the active force magnitude must be kept constant to ensure that our assumption of low Reynolds number remains valid (Re$=\frac{mF_\text{sp}}{\gamma^2\sigma}$) \cite{Suma2014}. Both these discussions warrant further investigation, which could be done by comparing results for a phase space varying $k_BT$ instead of $F_\text{sp}$ to achieve Pe, which in turn would necessitate longer simulation times as $\tau$ varies inversely with temperature.}
+
+For disks of diameter $\sigma$, the characteristic diffusion time (that is, the time it takes a particle to diffuse over its length) is $\tau_T = \frac{\sigma^2}{D_T}$, where diffusivity is defined as $D_T=\frac{k_BT}{\gamma_T}$. In active systems, typical values for the integration time step and $\tau$ are approximately ${\Delta}t=10^{-5}$ and $\tau\sim100$, respectively \cite{Prymidis_2016_SoftMatter, Redner_2013_PRL}. Thus, the number of steps for simulation is given by $\frac{100\tau}{{\Delta}t}$. Because $\tau$ varies with $\sigma^2$, the number of steps will increase with particle size.
+
+The force between two particles $i$ and $j$ is given by
+\begin{equation}
+\F_{ij} = -\frac{\partial U(\r_{ij})}{\partial \r_{ij}}
+\end{equation}
+As discussed in the previous section, we consider a system of particles with a repulsive force given by the Weeks-Chandler-Anderson (WCA) potential. This is simply a shifted Leonard-Jones (LJ) pair potential so that the potential smoothly goes to 0 at the potential's cut-off radius, $r_\text{cut}$
+\begin{equation}
+U(r) = \left\{ \begin{aligned}
+4{\epsilon}\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^6\right] + {\Delta}V(r) && r<r_\text{cut} \\
+0 && r \geq r_\text{cut}
+\end{aligned}
+\right.
+\end{equation}
+where $r_\text{cut}=1$ for our simulations and ${\Delta} V(r) = -(r-r_\text{cut})\frac{\partial V_{LJ}}{\partial r}(r_\text{cut})$. Thus, the force exerted on a given particle is the sum of its interactions with all particles that come within $r_\text{cut}$ of the shape.
+
+Finally, if we divide Equation \ref{eq:langevin} by $\gamma_T$, we can rewrite $\frac{\F_\text{random}}{\gamma_T}$ as noise $\etab(t)$. Noise ${\eta}(t)$ is a stationary Gaussian process with zero-mean (white noise), satisfying:
+\begin{equation}
+\begin{aligned}
+\langle \etab(t) \rangle &= 0 \\
+\langle \etab(t)\etab(t') \rangle &= 2D_T\delta(t-t')
+\end{aligned}
+\end{equation}
+We see that noise, then, is dependent upon translational diffusivity $D_T$ in the translational Langevin equation and rotational diffusivity $D_R$ in the rotational Langevin equations. Again using the assumption of low Reynolds numbers, we can equate $D_T = \frac{D_R\sigma^2}{3}$. By setting $\gamma_T=1$, we have thus defined the system's translational and rotational noise.
+
+\bibliography{Teff_LitReview}

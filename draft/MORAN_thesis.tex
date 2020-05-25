@@ -1,0 +1,164 @@
+% This is an AMS-LaTeX v. 1.2 File.
+
+\documentclass[leqno]{report}
+%\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\usepackage{amsfonts}
+\usepackage{amsxtra}     % Use various AMS packages
+\usepackage{rac_2}                        % Use Rackham thesis macros
+\usepackage{dbl12}
+%\usepackage{srcltx}
+\usepackage{epsfig}
+\usepackage{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Redefine margins and other page formatting
+
+\setlength{\oddsidemargin}{0.5in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Various theorem environments. All of the following have the same numbering
+% system as theorem.
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{introduction}[theorem]{Introduction}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\include{header}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\numberwithin{theorem}{chapter}        % Numbers theorems "x.y" where x
+                                        % is the section number, y is the
+                                        % theorem number
+
+%\renewcommand{\thetheorem}{\arabic{chapter}.\arabic{theorem}}
+
+%\makeatletter                          % This sequence of commands will
+%\let\c@equation\c@theorem              % incorporate equation numbering
+%\makeatother                           % into the theorem numbering scheme
+
+%\renewcommand{\theenumi}{(\roman{enumi})}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%This command creates a box marked ``To Do'' around text.
+%To use type \todo{  insert text here  }.
+
+\newcommand{\todo}[1]{\vspace{5 mm}\par \noindent
+\marginpar{\textsc{ToDo}}
+\framebox{\begin{minipage}[c]{0.95 \textwidth}
+\tt #1 \end{minipage}}\vspace{5 mm}\par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\bibliographystyle{plain}       % Set the bibliography style to AMS
+                                % alphabetized. (Can use ``amsalpha'' or
+                                % ``abbrv''instead.)
+
+% Title page as required by Rackham dissertation guidelines
+
+
+
+
+\titlepage{Computational Study of Critical and Emergent Behavior in Active Matter Systems}{Shannon E. Moran}{Doctor of Philosophy}
+{Chemical Engineering and Scientific Computing}{2020}
+{ Professor Sharon C. Glotzer, Chair \\
+  Assistant Professor Jordan Horowitz \\
+  Associate Professor Xiaoming Mao \\
+  Professor Robert Ziff }
+
+
+% Begin the front matter as required by Rackham dissertation guidelines
+
+\initializefrontsections
+
+% SM 5/23-- this was left here, but not sure why.
+% \unnumberedpage
+
+% Copyright page
+\copyrightpage{Shannon E. Moran}{moranse@umich.edu}{ORCID iD: 0000-0002-3579-3149}
+
+\setcounter{page}{1}
+
+% Dedication page
+\dedicationpage{To Mom and Dad.}
+
+% Acknowledgements page
+\startacknowledgementspage
+\input{front_matter/acknowledgements}
+
+
+% Table of contents, list of figures, etc.
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Abstract is the last thing before the rest of the thesis
+\startabstractpage
+\input{front_matter/abstract}
+
+
+\startthechapters
+% The individual files for each of the chapters are put here.
+% Save each chapter of your thesis to a seperate tex file
+% and then use the \input command to include this file in your
+% thesis.  For instance you can save a file to "intro.tex" and
+% then type \input{intro}".
+
+
+\chapter{Introduction}
+\label{ch:intro}
+\input{introduction/introduction}
+
+\chapter{Background}
+\label{ch:background}
+\input{introduction/background}
+
+\chapter{Computational methods}
+\label{ch:methods}
+\input{methods/methods}
+
+\chapter{Active shapes: Role of shape-driven effective interactions on emergent behavior}
+\label{ch:active-shapes}
+\input{active-shapes/draft/active-shapes}
+
+\chapter{Binary shapes: Interplay of shape-driven effective interactions + structural interference on emergent behavior}
+\label{ch:binary-shapes}
+
+\chapter{Percolation theory: Role of effective interactions as local interaction rules in a percolation model}
+\label{ch:percolation}
+
+\chapter{Conclusions and Future outlook}
+\label{ch:conclusions}
+\input{future_outlook}
+
+%\startappendices
+%\label{appendix}
+%\input{appendix}
+
+\bibliographystyle{unsrt}
+\bibliography{active-shapes-bib.bib}   % Use the BibTeX file ``biblio.bib''.
+
+
+\end{document}
