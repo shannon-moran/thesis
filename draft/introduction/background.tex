@@ -1,35 +1,114 @@
+\textcolor{blue}{This section is currently a work in progress, and will be uploaded as complete by EOD 5/29, if not earlier.}
+
 \section{Why active matter, matters}
-Potential applications, where it's used in the real world, why a theoretical explanation is important
 
+% Include recommended reading from Jordan: spinners doing work https://www.pnas.org/content/pnas/115/14/3569.full.pdf
+
+% > Applications we could use this for
+% In the field of colloidal science, this research has been stimulated by recent developments which allow us to synthesize “active” colloidal particles in the lab.
+% Active colloids refer to synthetic particles that move by converting energy into motion, for example chemical (e.g. Ref [1]) or magnetic energy (e.g. Ref [2]).
+%
+% The realization of active colloidal particles opens the possibility of creating new materials with various applications.
+% However, the lack of a unified theoretical framework makes the need for theoretical description and predictions via computer simulations a necessity.
+
+% Potential applications, where it's used in the real world, why a theoretical explanation is important
+%
+%
+%
+% Active matter is a field of rapidly expanding interest and research activity over the last decade \cite{Ramaswamy_2010_AnnRevConMatPhys,Marchetti_2013_RevModPhys,Bechinger_2016_RevModPhys,Marchetti_2016_CurrentOpinionColloidInterfaceScience}.
+% Vicsek's pioneering work showed a collection of point particles with alignment rules displays rich collective behavior, including phase separation \cite{Vicsek_1995_PRL}.
+% However, theoretical work describing the collective behavior of bacteria demonstrates that phase separation behavior is not reliant upon explicit alignment rules \cite{Cates_2010_PNAS}.
+% In a phenomenon known as ``motility-induced phase separation'' (MIPS), systems of disks were found to phase separate as a consequence of density-dependent particle velocity \cite{Cates_2013_EPL}.
+% This phase separation behavior of isotropic particles has been explained using a variety of models, including: athermal phase separation \cite{Fily_2012_PRL}, the kinetic steady-state balancing of particle fluxes \cite{Redner_2013_PRE, Redner_2013_PRL}, classical nucleation \cite{Richard_2016_SoftMatter,Redner_2016_PRL}, and the balancing of collision and ballistic timescales \cite{Bruss_2018_PRE}.
+% Importantly, phase separation predicted by theory has been observed in experiments, which confirm the activity-dependent formation of clusters and ``active crystals'' \cite{Palacci_2013_Science,Petroff_2015_PRL,Briand_2016_PRL}.
+%
+% However, in real-world systems particles (e.g. bacteria) are rarely isotropic in shape.
+% Thus, one thrust in the active matter community has focused on understanding how particle anisotropy will change the behavior theoretically predicted for systems of isotropic particles.
+% In a simple anisotropic model, simulations of rods with varying aspect ratios and densities display a rich variety of collective motion, such as laning, swarming, and jamming \cite{Wensink_2012_JPhysConMat,Wensink_2012_PNAS,Yang_2010_PRE}.
+% Additionally, simply changing the direction of the driving force relative to a fixed particle shape (e.g. ``rough'' triangles) drastically alters the resulting collective behavior and onset of phase separation \cite{Wensink_2014_PRE,Ilse_2016_JChemPhys}.
+%
+% Few general mechanisms have been proposed for the varying impacts of particle anisotropy on collective behavior.
+% Active squares display a steady state ``oscillatory'' regime in which large clusters break up and re-form \cite{Prymidis_2016_SoftMatter}.
+% Mixtures of gear-shaped ``spinners'' with opposite rotational driving forces phase separate through competing steric interactions \cite{Nguyen_2014_PRL, Sabrina_2015_SoftMatter, Spellings_2015_PNAS}.
+% In systems of active ``dumbbells'', particle anisotropy allows for the stabilization of cluster rotation \cite{Suma_2014_EPL, Cugliandolo_2017_PRL}.
+% This cluster rotation is also observed in active squares \cite{Prymidis_2016_SoftMatter}, but is notably absent in clusters of frictionless isotropic particles.
+%
+% From these studies, we can see a general description of the impact of particle shape anisotropy on emergent system behavior is needed.
+% Such a description would allow us to tailor the form and onset of critical behavior in active systems through ``implicit'' steric means, rather than explicit interaction rules.
+%
+%
 \section{Framework for design of active matter systems}
-
-\subsection{System design of active systems}
-
-\subsection{Particle design of active systems}
-
-\section{Theoretical understanding of active matter}
-
-\subsection{Critical onset}
-MIPS, Redner, collision theory
-
-\subsection{Emergent behavior}
-Much less here. Dumbbells, binary snowmen.
-
-\section{Universality classes of active matter}
-What is a universality class, and why does it matter?
-What work has been done on understanding the universality classes of active matter?
-Is this work good, or no?
-
 \begin{figure*}[t]
 \begin{center}
-\includegraphics[width=\textwidth]{../figures/framework.pdf}
+\includegraphics[width=\textwidth]{introduction/figures/framework.pdf}
 \label{fig:design_space}
 \caption{
 The design space for active matter can be broken into two components: System Design and Particle Design.
 In changing aspects of these two design components, we seek to engineer the Critical and Emergent Behavior a system exhibits.
-In this work (indicated by blue stars), we vary the stoichiometry (in the creation of a 2-component mixture) and implict interactions (shape), and identify emergent behaviors not previously seen in active matter systems.
+In this thesis, we vary (indicated by the blue stars) the stoichiometry (in the creation of a 2-component mixture) and implicit interactions (shape), and identify emergent behaviors not previously seen in active matter systems.
 Our discovery of novel active behavior by tuning just a narrow set of parameters in this space highlights the richness of this design space, and the opportunity for further theoretical work to understand the role of System and Particle Design on system behavior.
-(Seminal citations for each design component are included in the text.)
+(Seminal citations for each design component and target behavior are included in the text.)
 }
 \end{center}
-\end{figure}
+\end{figure*}
+%
+% Active matter has been an area of intense research over the last few decades.
+% Such systems are driven out of equilibrium by internal reservoirs of energy that particles translate to motion.
+% These systems exhibit novel emergent behavior, such as swarming, laning, and clustering, even in the absence of explicit attractive interations.
+% Theories have been developed to describe this behavior as the balance of collision and ballistic timescales, swim pressure, flux balancing at a cluster boundary, or a density-induced slowdown of particle velocity.
+%
+% A natural question we could ask would be whether we could control such emergent behavior-- and if so, how.
+% While some studies have focused on programming specific explicit interaction rules into particle behavior \cite{Mayank}, we can also envision developing implicit interaction rules that lead to specific bulk properties.
+%
+% One such example of an implicit interaction rule is particle shape.
+% Studies of anisotropic active particles demonstrate that a system's particles' shape significantly changes the landscape of possible emergent behavior accessible.
+% Additionally, systematic studies have shown a link between a particle shape's equilibrium structure and its activity-driven emergent behavior \cite{active_shapes}.
+% By better understanding the link between equilibrium behavior of a system's particles and the system's emergent behaviors, we could begin to purposefully design systems with target behaviors.
+% Could we design other particle shapes or systems to access this target behavior?
+%
+% One way we can envision doing this is in particle systems of multiple types.
+% While one-component systems rely upon all particles of one type to interact in a given matter, adding in additional particles adds in degrees of design freedom to the system.
+% An example of other potential design degrees of freedom is shown in Figure \ref{fig:design_space}-- e.g. stoichiometry, particle sizes, particle shapes.
+% In multi-component systems, we can rely upon interactions between different particle types to tailor behavior.
+% One area of the literature that has begun to be explored widely is looking at interactions of active particles that shepherd or tailor the emergent behavior of passive particles (Daphne\cite{Klotsa_2020_SoftMatter}, Bryan\cite{VanSaders_2019_arxiv}, Dijkstra\cite{VanDerMeer_2016_SoftMatter}).
+% A little bit of literature has looked at combining particles of different anisotropies in the same active systems \cite{Loewen_paper}.
+% These papers suggest that preferential clustering of like particles would be the rule in simulation, and that some particles can thus be used to ``shepherd'' other particles in the system.
+% However, studies thus far are system-specific demonstrations rather than broader investigations of anisotropic degrees of freedom.
+%
+% Here, we systematically investigate the role of particle anisotropy on the phase separation of two-component active systems of anisotropic particles.
+% This work suggests the equilibrium structure to phase separation behavior link found in previous works can also extend to behavior of multicomponent systems.
+%
+% We find that the interplay of particle assembly preferences can lead to a variety of behavior not seen before in active systems.
+% In an important contrast with previous works, we do not find that particles uniformly exhibit strong homophily.
+% First, we see that systems where component particles have one component with shear planes in their densest packing, and one with not shear planes in their densest packing, can lead to systems with coexisting fluid and crystalline droplets.
+% We posit that this represents a ``triple point'' in phase space, rather than a spinodal.
+% Second, we find that some particles can exhibit strong homophily observed as microphase separation.
+% We are able to quantify this homophily as a preferential self-attraction.
+% Finally, we find that some particles demonstrate heterophily, which allows them to act effectively as fluidizers that increase the diffusivity of particles within the clusters.
+%
+% To our knowledge, this is the first example of two-component active systems that demonstrates both homo- and heterophily dependent on particle shapes and demonstrates that it can as a design parameter.
+%
+% We observe three items of interest.
+% \begin{enumerate}
+% \item Microphase separation: well-mixed system exhibits ``microphases'' of crystals of one shape type
+% \item Triple point: observe a purely shape-driven ``triple point'' at which a system is phase separated into sparse gas, liquid, and solid crystallite phases
+% \item ``Plasticizer''-like behavior: Triangles, and to a lesser part squares, cause the dense phase of a binary system to fluidize. In systems where the other particle type would phase separate into a sparse gaseous phase and solid crystal, addition of triangles or squares leads to the formation of fluid, rather than solid, clusters
+% \end{enumerate}
+%
+% Can we use the fact that we find these behaviors to understand the thermodynamics of these systems better?
+
+
+\subsection{System design of active systems}
+
+
+\subsection{Particle design of active systems}
+% Marchetti's fractal particle slowed down immediately upon contact --> led to aggregation from fractals
+
+\section{Theoretical understanding of active matter}
+% Why we'd want to have a theoretical understanding of active matter
+
+\subsection{Critical onset}
+% MIPS, Redner, collision theory
+
+\subsection{Emergent behavior}
+% Much less here. Dumbbells, binary snowmen.
