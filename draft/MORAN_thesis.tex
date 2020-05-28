@@ -1,87 +1,71 @@
-% This is an AMS-LaTeX v. 1.2 File.
+%%% Template from UM AOSS Dept, via Erin (thanks, Erin!)
 
-\documentclass[leqno]{report}
-%\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-%\usepackage{amsfonts}
-\usepackage{amsxtra}     % Use various AMS packages
-\usepackage{rac_2}                        % Use Rackham thesis macros
-\usepackage{dbl12}
-%\usepackage{srcltx}
-\usepackage{epsfig}
+\documentclass[reqno,12pt,oneside]{report}  % right-side equation numbering, 12 point font, print one-sided
+%\documentclass[reqno,12pt,twoside,openright]{report} % right-side equation numbering, 12 point font, print two-sided, Chapters start on odd pages. Rackham only accepts one-sided, so this is for personal printings.
+
+\usepackage{rac_aoss}         % Use Rackham thesis style file
+\usepackage[numbers,sort&compress]{natbib}
+%% From PNAS paper
+\usepackage{amsmath,amsthm, amssymb, amsfonts, amsxtra}
+\usepackage{graphicx} %include figure files
+\usepackage{dcolumn} %align table columns on decimal point (?)
+\usepackage{bm} %bold math
+\usepackage{url} %url citations
+\usepackage{hyperref} %add hypertext capabilities
 \usepackage{verbatim}
+%% From AOSS template
+\usepackage[printonlyused]{acronym} % For the List of Abbreviations. Read acronym.pdf on ctan.tug.org
+\usepackage{setspace}    % Allows you to specify the line spacing
+\doublespacing           % \onehalfspacing for 1.5 spacing, \doublespacing for 2.0 spacing.
+
+% =============
+% Added by Shannon
+% =============
+\usepackage{float}
+\usepackage{color}
+\usepackage{siunitx}
+% Define useful shortcuts
+\def\o{\mathbf{i}}
+\def\d{\text{d}}
+\def\r{\mathbf{r}}
+\def\k{\mathbf{k}}
+\def\x{\mathbf{x}}
+\def\vv{\mathbf{v}}
+\def\F{\mathbf{F}}
+\def\D{\mathbf{D}}
+\def\T{\mathbf{T}}
+\def\z{\mathbf{z}}
+\def\etab{\mathbf{\eta}}
+\def\Pe{\text{Pe}}
+% =============
+% </Added by Shannon>
+% =============
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% If printing two-sided, this makes sure that any blank page at the
+% end of a chapter will not have a page number.
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}
+\thispagestyle{empty}
+\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Redefine margins and other page formatting
 
-\setlength{\oddsidemargin}{0.5in}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Various theorem environments. All of the following have the same numbering
-% system as theorem.
-
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{prop}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{question}[theorem]{Question}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{assumption}[theorem]{Assumption}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{notation}[theorem]{Notation}
-\newtheorem{condition}[theorem]{Condition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{introduction}[theorem]{Introduction}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-\include{header}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\numberwithin{theorem}{chapter}        % Numbers theorems "x.y" where x
-                                        % is the section number, y is the
-                                        % theorem number
-
-%\renewcommand{\thetheorem}{\arabic{chapter}.\arabic{theorem}}
-
-%\makeatletter                          % This sequence of commands will
-%\let\c@equation\c@theorem              % incorporate equation numbering
-%\makeatother                           % into the theorem numbering scheme
-
-%\renewcommand{\theenumi}{(\roman{enumi})}
+% \setlength{\oddsidemargin}{0.5in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%This command creates a box marked ``To Do'' around text.
-%To use type \todo{  insert text here  }.
-
-\newcommand{\todo}[1]{\vspace{5 mm}\par \noindent
-\marginpar{\textsc{ToDo}}
-\framebox{\begin{minipage}[c]{0.95 \textwidth}
-\tt #1 \end{minipage}}\vspace{5 mm}\par}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-
-\bibliographystyle{plain}       % Set the bibliography style to AMS
-                                % alphabetized. (Can use ``amsalpha'' or
-                                % ``abbrv''instead.)
 
 % Title page as required by Rackham dissertation guidelines
 
-
-
-
-\titlepage{Computational Study of Critical and Emergent Behavior in Active Matter Systems}{Shannon E. Moran}{Doctor of Philosophy}
+\titlepage{Computational Study of Phase Separation and Emergent Behavior in Active Matter Systems with Particle Shape}{Shannon E. Moran}{Doctor of Philosophy}
 {Chemical Engineering and Scientific Computing}{2020}
 { Professor Sharon C. Glotzer, Chair \\
   Assistant Professor Jordan Horowitz \\
@@ -139,15 +123,17 @@
 \label{ch:methods}
 \input{methods/methods}
 
-\chapter{Active shapes: Role of shape-driven effective interactions on emergent behavior}
+\chapter{Self-propelled particle shape tailors cluster onset through effective interactions}
 \label{ch:active-shapes}
-\input{active-shapes/draft/active-shapes}
+\input{active-shapes/active-shapes}
 
-\chapter{Binary shapes: Interplay of shape-driven effective interactions + structural interference on emergent behavior}
+\chapter{Shape-driven effective interactions access novel emergent behavior in an active systems}
 \label{ch:binary-shapes}
+\input{binary-shapes/binary-shapes}
 
-\chapter{Percolation theory: Role of effective interactions as local interaction rules in a percolation model}
+\chapter{Phase separation and percolation transitions are decoupled in anisotropic active matter}
 \label{ch:percolation}
+\input{percolation/percolation}
 
 \chapter{Conclusions and Future outlook}
 \label{ch:conclusions}
@@ -158,7 +144,16 @@
 %\input{appendix}
 
 \bibliographystyle{unsrt}
-\bibliography{active-shapes-bib.bib}   % Use the BibTeX file ``biblio.bib''.
+\startbibliography
+\begin{singlespace} % Bibliography must be single spaced
+\bibliography{active-shapes/active-shapes-bib,binary-shapes/binary,percolation/percolation}   % Use the BibTeX file ``biblio.bib''.
+\end{singlespace}
 
+% An external Abstract that can be printed at the end of the document,
+% for separate submission to Rackham. Comment it out when not needed. - jg
+%\startextabstractpage
+%{Local structure in hard particle self-assembly and assembly failure}{Erin Griffin Teich}{Chair: Sharon C. Glotzer}
+%\input{abstract}
+%\label{ext_abstract}
 
 \end{document}
