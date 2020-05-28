@@ -1,0 +1,276 @@
+Active matter phase separation is a non-equilibrium phase transition with no clear equilibrium counterpart, as phase separation occurs even in the absence of explicit attractive forces.
+Recent efforts have sought to map the simplest active matter system, isotropic active Brownian particles, onto equilibrium universality classes as means of extending active matter theory.
+Given the significant impact even implicit steric interactions can have on the phase separation behavior in such systems, we pose the question: are changes the effective interactions between active Brownian particles due to steric interactions (shape) sufficient to change the universality class of an active matter system?
+We propose a mapping of active matter near the order-disorder transition onto a non-equilibrium directed percolation model.
+In doing so, we are able to identify four distinct curve collapses of cluster formation in the 2D polygon systems studied here.
+We further explore the critical behavior of these groups and find that the quasicritical behavior of the cluster scaling distribution predicts the same groups as our curve collapses.
+Further work will be needed to confirm the critical exponents, including a more rigorous finite size scaling approach to identify the critical point of each system.
+
+\section{Background}
+% What: What field is this in, and what are the important questions?
+Active matter phase separation is a non-equilibrium phase transition with no clear equilibrium counterpart.
+In a simple active matter system, active Brownian particles undergo phase separation into coexisting sparse and dense regions in the absence of explicit interactions \cite{citation_needed}. %binder, [23,42–47]
+Changes to the particle design of such active Brownian particles can effect changes to the phase separation onset parameters\cite{Prymidis_2015_SoftMatter,Moran_2020} and emergent behavior (e.g. swarming, arrested phase separation, clustering), even without the addition of explicit attraction rules \cite{citation_needed}.
+Developing a theoretical understanding of the impact a wide range of particle design parameters could have on the critical, phase separation, and emergent phenomena of active systems would be of great value as the field looks to engineer particles with targeted behaviors.
+
+% What: What are some previous related open questions, and how have those been solved?
+One potential approach to a theoretical framework of the impact on inter-particle interactions on the system is to map the system onto a known universality class.
+Identifying universal behavior allows us to transfer knowledge of a well-studied system to a different, less well-characterized system.
+
+While phase transitions have been studied in non-equilibrium systems, this is typically done by mapping onto an equilibrium system and investigating the non-equilibrium effects on their critical behavior.
+Previous studies have mapped the active Ising model\cite{Solon_2015_PRE} and a lattice model of active Brownian particles onto the equilibrium Ising universality class\cite{Ising_yes}.
+Separately, studies of the phase transition in a non-lattice system of active Brownian particles did not demonstrate scaling behavior the equilibrium Ising universality class\cite{Ising_no}
+That a mapping of active matter onto an equilibrium phase transition could be sensitive to such a difference in system configuration highlights that changes to the active Brownian particle interactions are likely to lead to changes in the phase transition behavior and, perhaps, changes in universal scaling behavior.
+
+We propose a slightly different approach: can we map an active matter phase transition onto a well-studied class of \textit{non-equilibrium} phase transitions? Such an approach has previously been used to identify a non-phase transition anisotropic percolation transition in the Vicsek model with explicit interaction terms\cite{Flock_percolation_2019,Vicsek_1995_PRL}.
+
+We ask whether changes to implicit interactions via shape are sufficient to drive systems of different particle shape types into different universality classes-- and if so, whether they are classes new to active matter or well-known equilibrium universality classes.
+
+% Why: What problems will answering these questions help us solve?
+
+% What is our goal in this paper:?
+Our goal in this paper is to study clustering phenomena in a system of active particles with no explicit interaction terms, but with shape anisotropy that lead to steric interactions.
+Specifically, we look to understand if the phase separation transition can be mapped onto a percolation transition.
+We look to calculate the critical exponents and determine the universality of behavior in self-propelled systems of different shapes.
+Understanding the impact of particle interaction changes on the universality of active systems, if any impact, will be important for understanding the generalizability of extensions of established phase separation theory onto active matter systems.
+
+We expect the potential for multiple universality classes for two reasons.
+
+First, studies of the phase separation onset in systems of active anisotropic particles have shown that changing particle steric interactions through shape can both depress and elevate the density required for phase separation, relative to that in disks \cite{Prymidis_2015_SoftMatter,Moran}. This shift in phase separation onset can also be accompanied by differences in the emergent behavior (e.g. swarming, clustering).
+
+
+Second, we can use directed percolation as a model system for understanding the impact changes to particle interactions may have on the universal behavior of active systems.
+One of the simplest non-equilibrium universality classes, directed percolation describes systems in which the probability of a bond forming is not uniform in all directions.
+However, studies have shown that changes to the local rules governing bond formation in a directed bond percolation model can lead to networks with different universality classes \cite{TBD}.
+Extending the analogy to active matter, we might expect that changes to ``local rules''-- e.g. changing the steric interactions between particles due to shape-- would lead to different universality classes.
+
+% How: What is a  creative way of solving one of those open questions that we'll use in this paper?
+
+
+
+% What: We are able to answer one of these narrowly-defined questions with the following answers.
+
+
+
+
+% ======
+% METHODS
+% ======
+\section{Analysis methods}
+
+\subsection{Normalizing time to account for noise in active systems}
+
+In a non-equilibrium process with noise, systems originating from different random configurations do not phase separate at a uniform absolute time.
+Typically, phase separation require some ``nucleation''-type event to facilitate the onset of clustering.
+We use a normalized time $\theta/\theta_\text{free}$ to account for the likelihood of these nucleations with changes to shape, system density, and active force.
+
+Here, $\theta$ is the time it takes for a given particle to ballistically travel its own diameter, and is only a function of shape and the active driving force.
+To account for differences in the system densities (which correspond to the likelihood of ``nucleation''-inducing collisions), we calculate the time for a particle to travel the mean free path, $\theta_\text{free}$.
+From the classic collision theory of reaction kinetics, we can describe the mean free path ($\lambda$) as
+\begin{equation}
+\lambda = \frac{v_0t}{(2d)(v_0t)\Phi} = \frac{1}{(2d)\Phi}
+\end{equation}
+where $v_0$ (particle speed) and $t$ (time) cancel out to leave $\lambda$ a function only of the shape cross-section, $d$, and system density, $\Phi$.
+The time for a particle to travel this mean free path, then, is:
+\begin{equation}
+\theta_\text{free} = \frac{\lambda}{v_0} = \left(\frac{1}{(2d)\Phi}\right)\left(\frac{1}{v_0}\right) = \frac{1}{2d\Phi{v_0}}
+\end{equation}
+We set $\theta/\theta_\text{free}$ equal to zero at the point the cluster fraction $N_\text{clustered}/N>0.5$.
+The final time to plot is determined by the time at which the cluster fraction reaches $0.95$.
+
+\subsection{Calculating the cluster size distribution}
+\label{sec:CSD}
+% I calculate n_s, but could also frame this as the probability of finding a cluster of size s when choosing randomly from clusters (the number of clusters with size s one finds in given configurations)
+
+The cluster size distribution is given by the number of clusters ($n_s$) of size $s/N$, where $s$ is the number of particles in the cluster and $N$ is the number of particles in the system.
+We sample at every 100 time units ($\theta$, the time it takes a particle to ballistically travel its own diameter) at the steady-state configurations of each simulation, and calculate error bars over all samples from all replicates.
+
+\subsection{Determining the fractal dimension of clusters}
+% (We can also calculate this using information and correlation dimensions [28,37]), see Marchetti fractal paper for citations.
+
+We determine the fractal dimensions of clusters by calculating the box-counting (or Minkowski-Bouligand) dimension \cite{Schroeder_1991}.
+We divide space into a square grid composed of boxes with side length $\epsilon$. As $\epsilon\rightarrow{0}$, we can calculate the fractal dimension, $d_f$, as
+\begin{equation}
+d_f(\epsilon) = \frac{\ln(N(\epsilon))}{\ln{e}-1}
+\end{equation}
+where $N(\epsilon)$ is the number of grid boxes of side length $\epsilon$ that are occupied by the particles in a cluster.
+To perform the box-counting, we used the open-source Python package \verb|numpy|'s implementation of a multidimensional histogram (\verb|histogramdd| in \verb|numpy| v1.18)\cite{numpy}.
+We calculate the fractal dimension $d_f$ as the slope of the linear plot of $\ln{N(\epsilon)}$ versus $\ln(\epsilon)$.
+
+
+\subsection{Systems studied and finite size scaling}
+\textcolor{blue}{5/26: Pending further analysis.}
+
+
+% ======
+% RESULTS
+% ======
+\section{Mapping continuum active matter behavior with steric interactions onto a percolation model}
+
+We map active systems with with shape-induced steric interactions onto a percolation-like model as outlined in Table \ref{tab:mapping}.
+
+However, a key element that we do not have is that of a spanning cluster.
+In percolation models, the percolating cluster is one that spans the simulation box from edge to edge.
+Instead, we calculate whether the system has phase separated or not, based on the calculations laid out in Section \ref{sec:critical-density}.
+
+Given what may seem to be a fundamental difference between percolation and the active systems under study here, a natural question might be: why map this onto percolation at all?
+We do this in part because other studies have successfully identified percolation transitions in active systems \cite{Flock_percolation_2019,citation_needed}, and in part because directed percolation is the simplest non-equilibrium universality class we could envision a mapping to\cite{percolation_book,citation_needed}.
+Additionally, the local preferential bonding rules of directed percolation provide a simple analogy for the preferential steric attraction and ``bonding'' seen in shapes.
+This mapping provides a useful framework for evaluating the critical behavior of active shape systems, if not a perfect match.
+
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{ >{\raggedright}m{0.2\textwidth} >{\centering}m{0.2\textwidth} >{\centering}m{0.2\textwidth} >{\raggedright\arraybackslash}m{0.4\textwidth}}
+\hline
+\textbf{Value} & \textbf{Percolation} & \textbf{Active systems} & \\ \hline
+Bond/site occupancy probability & $p$ & $\Phi$ & Probability of a ``bond'' occurring \\ \hline
+System size & N or L & N & Number of components in a system that could be connected through an event occurring with probability p/$\Phi$ \\ \hline
+Largest cluster fraction & C/N & C/N, $N_\text{clustered}/N$ & Largest cluster remains the same. However, as some systems phase-separate very quickly, $N_\text{clustered}/N$ can also be a proxy. \\ \hline
+Normalized time / progress & $t/N$ & $\theta/\theta_\text{free}$ & Time, normalized to the system's settings \\
+\hline
+\end{tabular}
+\caption{Mapping of percolation quantities to active matter system quantities.}
+\label{tab:mapping}
+\end{center}
+\end{table*}
+
+\section{Phase separation behavior}
+% What others see, and so what we might expect to see
+% What we actually see, highlighting key points of interest
+% Why do we see those things?
+% How do we know that our explanation is right?
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{percolation/figures/percolation_analogy.pdf}
+\caption{Probability of phase separation occurring in systems of varying shape anisotropy. Probability is calculated as the fraction of replicates at each parameter combination (Pe=150, and density as indicated) that phase separate for systems of 10,000 particles. This closely resembles P($\rho$)/$\rho$ plots for calculating the probability of a percolating cluster over varying system densities.}
+\label{fig:cluster_percolation}
+\end{figure}
+
+While in the thermodynamic limit $P(\Phi)$ is a step function with the jump exactly located at the phrase transition, in finite systems $P(\Phi)$ is smoothed around the finite-size percolation point \cite{percolation_book}.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{percolation/figures/cluster_formation.pdf}
+\caption{Evolution of phase separation in the systems under study.
+The evolution of the fraction of a system that is in a cluster is plotted versus the normalized time, $\theta/\theta_\text{free}$, at the minimum system density of phase separation ($\Phi_c$)
+\textcolor{blue}{b) Break out 3/4/6-gons here as well. Will need to adjust how we break out the timescales there.}
+\textcolor{red}{c) 5/26: Updating with disks, per discussion at data meeting.}
+}
+\label{fig:cluster_formation}
+\end{center}
+\end{figure}
+
+Systems with percolation models leading to different universality classes exhibit quantitatively different time evolution of phase separation \cite{percolation_papers}.
+We know that particle shape leads to very different emergent behavior and phase separation onset in 2D active systems-- however, it is not clear from previous studies if such different behavior would correspond with different universality classes \cite{Moran_2020}.
+
+In Figure \ref{fig:cluster_formation}, we see that at the phase separation density, behavior across all systems collapses onto 4 ``universal'' curves.
+First, evolving over the largest time ranges, is 5/7/8-gons.
+Phase separation for these particles at the density of the phase separation transition is characterized by the (relatively-speaking) slow growth of the phase-separating cluster.
+The second group of note is 3- and 4-gons, which near the phase separation transition show rapid phase-separation, highlighted in Figure \ref{fig:cluster_formation}b.
+\textcolor{blue}{More about this. Talk about 6-gons.}
+\textcolor{red}{5/26: Update with observations of systems of disks.}
+
+We can replicate this behavior at a range of system sizes, suggesting that these behaviors are robust outcomes of system preferences.
+Further, this difference in phase separation behavior suggests that there are fundamentally different local rules at play in these different types of systems.
+Additionally, the stark difference between disks and any of the shape systems studied emphasizes that one universality class for all active Brownian particle systems is unlikely.
+
+\section{Calculating the cluster scaling distribution}
+% What others are see, and what we might expect to see
+% What we actually see, highlighting key points of interest
+% Why do we see those things?
+% How do we know that our explanation is right?
+
+We don't actually have a critical point.
+In general, only at the percolation point is the cluster size distribution truly scale free ($P(s)$\sim{s}^{-\tau_F}).
+
+We do have the location of the phase separation onset (the order-disorder transition) as a system density $\Phi_c$ for a given P\'{e}clet number.
+We calculate the cluster scaling distribution as described in Section \ref{sec:CSD}.
+
+Despite not being at the critical point, we see power law behavior in all systems studied.
+Such non-critical power law scaling of cluster size as has been reported in other reports of active matter systems \cite{[10,24,25]}.
+In these other studies, this ``quasicritical'' behavior has been seen in the region of parameter space near the order-disorder transition \cite{[26]}.
+some authors have conjectured that, in active systems exhibiting collective motion, this transition from disordered to ordered collective motion could be generically related to non-equilibrium clustering [26].
+It has also led some authors to speculate that the onset of collective motion should be accompanied by a percolation transition. \cite{Flock_percolation_2019}
+
+Far from this extended, quasicritical region, the cluster size distributions are clearly not scale-free. \cite{Flock_percolation_2019}
+
+At the critical point of standard percolation, the cluster-size distribution power-law behavior is controlled as:
+\begin{equation}
+\tau_F = \frac{2d_s-\beta/\nu}{d_s-\beta/\nu}
+\end{equation}
+where $d_s$ is the spatial dimension (in our systems, 2).
+
+Because these observations were mostly made in the region of parameter space where the order-disorder transition takes place, some authors have conjectured that, in active systems exhibiting collective motion, this transition from disordered to ordered collective motion could be generically related to non-equilibrium clustering [26]. \cite{Flock_percolation_2019}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{percolation/figures/tau.pdf}
+\caption{Cluster size distribution and calculation of power law exponent, ``Preliminary $\tau$''.
+The true Fisher exponent, $\tau$, should be calculated at the system critical point.
+}
+\label{fig:cluster_formation}
+\end{center}
+\end{figure}
+
+\textcolor{blue}{
+Fractal dimension analysis pending as of 5/26.
+}
+% ======
+% Other calculations I could do
+% ======
+% Time scales of the largest jumps in the cluster could also hint at a different between the percolation transition and the phase separation onset we see.
+% Can also calculate the average cluster linear extension.
+% I think this might highlight that the true percolation threshold is different from phase separation-- which would be very interesting!
+
+% In a gas–liquid coexistence state, the system evolves in order to minimize the surface area of the cluster, resulting in compact spherical or cylindrical geometries.
+% In the percolating network, the active system appears to almost attempt to maximize the surface area, resulting in a highly branched network. \cite{Prymidis_2015_SoftMatter}
+% (They look at the ratio of surface to volume of the clusters to calculate that)
+
+% It is likely these are going to be more spherical clusters, not fractal.
+% A complex interplay between aggregation and coalescence occurs in many colloidal polymeric systems and determines the morphology of the final clusters of primary particles: https://onlinelibrary.wiley.com/doi/full/10.1002/mats.201300140
+% It is known that pure aggregation leads to clusters of fractal nature,2 whereas pure coalescence (e.g., of bubbles or liquid droplets) typically leads to spherical clusters.
+
+
+\section{Calculating critical exponents, and limitations in determining the critical density}
+\textcolor{red}{As of 5/26: Pending further simulation results.}
+% see finite-size scaling section that percolation paper
+
+% The percolation threshold at $p=p_c$ gives the position of a phase transition, but only for systems without broken symmetry. \cite{percolation_book}
+
+% Phase transition calculations are very sensitive to the calculated critical point in the system.
+%
+% Previous work calculating the critical point in active matter has calculated the critical point to be a function of the P\'{e}clet number ($\Pe$), which characterizes relative advective and diffusive motion in a system, and the system density, $\Phi$.
+%
+% \textcolor{red}{The way to do this rigorously, as done by Speck and Binder, would be [...]. Partridge and Lee get around this by doing [...].}
+%
+% In our systems, we use the system density ($\Phi$) at which, for a given $\Pe$ value, we see the onset of phase separation as the critical point.
+% This has an obvious shortcoming in that we do not vary the $\Pe$ to find the absolute critical point.
+% Put more accurately, what we have found is the minimum $\Phi$ for onset of phase separation.
+%
+% \textcolor{blue}{It is like that the reason I'm not able to fully calculate the other exponents is because of this.}
+%
+% What's we've done is look at the phase space below the binodal (which separates the disordered gas phase from the coexistence phase in noise ($\eta$) and density ($\rho$) space), as was done in paper \cite{Flock_percolation_2019}
+%
+% Gathering data for sufficient statistics is not as straight-forward in these systems as a standard percolation model.
+% In our case, we have to generate sufficiently uncorrelated configurations from the dynamics.
+% This requires first to evolve the system from some initial condition into the stationary state (which for large systems may require a considerable number of timesteps).
+% Then, to obtain configuration averages, one has to take averages over timescales much larger than the typical autocorrelation time.
+%
+% The shift in percolation threshold from the phase transition and critical exponents could be traced back to the spontaneous symmetry breaking taking place in the Toner and Tu phase.
+% An external ordering field may also alter (albeit in a different way) the nature and location of the percolation point [51,52]. \cite{Flock_percolation_2019}
+
+
+
+% ======
+% CONCLUSIONS
+% ======
+\section{Conclusions and Future work}
+\textcolor{blue}{As of 5/26: Will update after additional analysis is complete.}
+% 0) What we did
+
+% 1) What we find
+
+% 2) Some future work
+
+% 3) Where this is seen in the real world (what is the impact?)
