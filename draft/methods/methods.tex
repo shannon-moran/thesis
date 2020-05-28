@@ -1,19 +1,95 @@
 An identical particle model was used for all studies in this thesis.
 
 \section{Particle model}
-take from active matter paper
 
-\section{Disk model}
-WRITE
+\begin{figure}[t]
+\begin{center}
+\includegraphics{methods/figures/model.pdf}
+\caption{
+(a) Shape anisotropy is studied with a family of regular polygons of side length $a$.
+Here we show a pentagon as example.
+Particles interact through a purely repulsive WCA potential characterized by $r_\text{WCA}$.
+Full specification can be found in Section \ref{sec:methods}.
+(b) Simulation timescales are characterized by $\tau$, the time for a particle to ballistically travel its characteristic length, $\sigma$, calculated as the diameter of an equiarea ($A$) disk.
+(c) Force anisotropy is defined by the active force director, $\hat{n}^A$, which propels the shape either edge- or vertex-forward.
+A key feature of this system is that collisions of anisotropic particles can sustain translational and/or rotational motion.
+Illustrative collisions are provided for each force director.
+}
+\label{fig:model}
+\end{center}
+\end{figure}
+
+% =====
+% Model and dynamics
+% =====
+
+The model particles used in this study are shown in Figure \ref{fig:model}.
+We study a family of regular polygons of side number $3{\leq}n{\leq}8$.
+We set particle side length $a$ to maintain a constant side-to-corner perimeter ratio, $\zeta$, to $\zeta = \frac{\sum_s{a_s}}{2\pi r_\text{WCA}}=9$ over all sides $s$.
+Here, $r_\text{WCA}$ is the radius of the frictionless, purely repulsive, excluded volume Weeks-Chandler-Anderson (WCA) potential, $U(r)=4\epsilon[(\sigma_\text{WCA}/r)^{12}-(\sigma_\text{WCA}/r)^6]+\epsilon$ for $r<r_\text{cut}$, where $\sigma=2r_\text{WCA}$, $r_\text{cut}=2^{(1/6)}\sigma_\text{WCA}$, and $r_\text{WCA}=1$ for all simulations \cite{WCA_1971}.
+We know from equilibrium studies \cite{AvendanoEscobedo_2012_SoftMatter,Zhao_2011_PNAS,Zhao_2009_PRL} and other works on active anisotropic particle systems \cite{Prymidis_2016_SoftMatter} that self assembly and critical behavior is sensitive to the effective ``roundness'' of particle vertices.
+As the repulsive interaction introduces a slight ``rounding'' to the shapes, maintaining a constant $\zeta$ over all simulations ensures our systems can be compared with one another.
+This value $\zeta=9$ was chosen to balance shape fidelity (less rounding) and simulation feasibility with computational demands.
+
+We also explore anisotropy in the constant active force director ($\bm{F}^A_i=v_0\hat{n_i}^A(\cos{\theta_i}, \sin{\theta_i}$)) applied to each particle $i$.
+For a given simulation, we set $\hat{n}_i$ to be either perpendicular to a side of the particle (\textit{edge-forward}) or bisecting a vertex (\textit{vertex-forward}), as shown in Figure \ref{fig:model}c.
+The active force director $\hat{n}_i$ is initialized randomly for each particle from the set of possible vertex-forward or edge-forward directions for each simulation, and is locked in the particle's frame of reference.
+The active force direction changes only with particle rotation due to thermal fluctuations and collisions.
+
+We took further care to ensure consistent anisotropy through our choice of active force magnitude and temperature.
+Our systems were run at P\'{e}clet ($\Pe$) number of $\Pe=150$, where $\Pe$ is a measure of active (advective) to diffusive motion ($\Pe=\frac{v_0\sigma}{k_BT}$, where $\sigma$ is the diameter of an equi-area disk for a given shape).
+In this Pe regime, we can treat the active driving force as the primary contributor to particle motion over thermal fluctuations.
+By setting the temperature of the thermal bath governing the fluctuations to $k_BT = \frac{v_0\sigma}{\Pe}$ and the magnitude of the active driving force $v_0=1$, we ensure that the interaction distance between interacting particles remains constant for all simulations.
+
+Particle motion was solved for using the Langevin equations of motion.
+\begin{equation}
+m_i\dot{\bm{v_i}} = \sum_{j}\bm{F}^{Ex}_{ij} - \gamma\cdot\bm{v_i} + \bm{F}^A_i + \bm{F}^R_i
+\end{equation}
+\begin{equation}
+m_i\Ddot{\theta_i} = \sum_{j}\bm{T}^{Ex}_{ij} - \gamma_R\cdot\bm{\omega_i} + \sqrt{2\mathcal{D_R}}\eta(t)_i^R
+\end{equation}
+Mass ($m_i$) is set to \num{1d-2} such that the dynamics closely approximate the Brownian limit in line with the expected dynamics of bacteria and colloidal-scale particles.
+The forces and torques due to excluded volume ($\bm{F}^{Ex}_{ij}$ and $\bm{T}^{Ex}_{ij}$) were calculated using a discrete element method \cite{DEM_2017}, which calculates interparticle interactions between a point on one particle perimeter and a point on another particle's perimeter.
+Translational and rotational velocities are given by $v_i$ and $\omega_i$, respectively.
+We parametrized the implicit solvent via the translational drag coefficient $\gamma=1$ and $\gamma_R = \frac{\sigma^3\gamma}{3}$ per the Stokes-Einstein relationship.
+These parameter choices correspond to the overdamped, diffusive limit.
+Our model does not account for solvent-mediated hydrodynamic interactions between active particles.
+Although there is a small inertial component in our model, we confirmed that it is not critical for any of the observed behavior.
+The last term in both equations accounts for thermal fluctuations.
+Noise is included via Gaussian random forces $\bm{F}^R_i = \sqrt{2\gamma k_BT}\eta(t)$ that model a heat bath at temperature $T$.
+Here $\eta(t)$ are normalized zero-mean white-noise Gaussian processes ($ \langle \eta_i(t) \rangle = 0 $ and $ \langle \eta_i(t)\eta_j(t') \rangle = \delta_{ij}\delta(t-t') $).
+This ensures thermodynamic equilibrium in the absence of the externally applied forces ($\bm{F}^{A}_{ij}$).
+
 
 \section{Dynamics and simulation methods}
-take from active matter paper
+% =====
+% Simulation protocol from active shapes paper
+% =====
 
-\subsection{Brownian versus Langevin dynamics}
-consider nixing
+The area fraction covered by $N$ particles was calculated as $\phi=\frac{NA_i}{A_\text{box}}$, where the area $A_i$ of particle $i$ includes both the hard shape and the rounding of $r_\text{WCA}=1$ induced by the WCA potential.
+Each simulation contains $N=\num{1d4}$ particles in a square simulation box with periodic boundaries, with box size chosen to achieve the desired density.
 
-\section{Open source software use}
-simulation: hoomd
-analysis and visualization: freud, ovito, plato, rowan
-data management: signac, garnett
-other python: jupyter notebooks
+The timescale of the simulation, $\tau$, is the time for a particle to ballistically travel its own diameter ($\tau = \frac{\sigma\gamma}{v_0}$).
+The Langevin equations of motion were numerically integrated using a stepsize of \num{1d-3}, chosen to balance efficiency with simulation stability.
+Particle positions were randomly initialized and allowed to relax with a repulsive isotropic potential between particle centroids at $\phi=0.10$ for $\num{5d5}$ time steps.
+This isotropic potential was then turned off and the WCA excluded volume potential between particle perimeter points was turned on while the box was slowly compressed to the target system density over $\num{5d5}$ time steps.
+Only after these initialization steps was the active force turned on and the simulation run for $5000\tau$.
+
+We assert that the simulations have reached steady state when the total system inter-particle collision pressure has reached a constant value.
+Ten replicates were run at each statepoint to provide sufficient statistics near the critical density.
+
+Simulations were run using the open-source molecular dynamics software HOOMD-blue (v2.2.1 with CUDA 7.5).
+The Langevin integrator uses a velocity-Verlet implementation \cite{HOOMD_2008}.
+Simulations were performed on graphics processing units (GPUs) \cite{HOOMD_2008, HOOMD_2015}.
+Shape interactions were modeled using the discrete element method implementation in HOOMD-blue\cite{DEM_2017} using an optimized rigid body routine for particle rotations\cite{HOOMD_2015}.
+The isotropic repulsive potential during initialization was implemented using the dissipative particle dynamics (DPD) pair force implemented in HOOMD-blue\cite{DPD_2011}.
+
+
+\section{Open source software used}
+The open-source simulation software HOOMD-blue, mentioned above, was used to perform the Molecular Dynamics simulations that form the basis of this work \cite{HOOMD_2008, HOOMD_2015}.
+
+Additional open source software managed within the Glotzer group was critical to completion of this work. Clustering, density, and nearest neighbor analyses are detailed in their respective Chapters' analysis sections and were implemented with Freud \cite{freud}. Data and simulation workflows were managed using the \verb|signac| framework \cite{signac}. File format management was performed using the \verb|garnett| package\footnote{https://garnett.readthedocs.io/en/stable/}.
+
+The open source Python community's also provided packages instrumental to performing the analysis here, including Jupyter notebooks\cite{jupyter} and the \verb|scipy|\cite{scipy} and \verb|numpy|\cite{numpy} packages.
+
+Simulation data in Chapter \ref{ch:active-shapes} were visualized using Plato\footnote{https://github.com/glotzerlab/plato} and Chapter \ref{ch:active-shapes}-\ref{ch:percolation} were visualized using Ovito \cite{ovito}.
