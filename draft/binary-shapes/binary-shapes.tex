@@ -1,0 +1,297 @@
+
+% ======
+% Use abstracts as intro
+% ======
+
+% motivation + key question to be answered
+Studies of self-propelled active particle systems have demonstrated that particle shape can change the emergent and critical behavior of a system through steric-induced changes to particle collisions.
+This raises the question: how would multiple steric-induced collision types in a system impact the observed collective behavior?
+% how we answered that question in this paper
+Here, we computationally explore the emergent behavior found in binary mixtures of self-propelled polygons at different size ratios and stoichiometry.
+% what we found
+We find emergent phenomena that, to our knowledge, has not been seen in other systems of active matter.
+First, we identify microphase separation resulting from ``steric bonding'', a shape-induced and activity-induced preferential attraction we can quantify between like-species in the absence of explicit attractive interactions.
+Second, we observe the formation of stable fluid clusters at steady state, resulting from the addition of a first shape type that disrupts the dense-packing formation of the second shape type.
+This structural disruption and corresponding increase in particle motility also facilitates the formation of a larger phase-separated regime.
+Finally, we highlight that the same mechanism that enables fluid clusters can also stabilize a three-phase steady state with a fluid cluser, solid cluster, and sparse gas phase.
+% why this is important
+Importantly, all the observed behavior is sensitive to chosen design parameters (size ratio, stoichiometry).
+That we find such rich phenomena in investigating just a narrow slice of the design space for self-propelled active particles highlights the potential for a wide range of engineered behavior in such systems.
+
+
+% ======
+% METHODS
+% ======
+\section{Analysis methods}
+
+\subsection{Choice of systems}
+We use the particle implentations described in previous studies of anisotropic shapes to study these sytems \cite{active_shapes}.
+Here we study a regular polygons of side number $3{\leq}n{\leq}8$.
+In a previous work\cite{active_shapes}, we found that the critical density of systems of active polygons for 5 sides and above did not strongly depend on the direction of the force director.
+For this study, then, we set the force director to be fixed to the particle shape propelling the shape vertex-forward.
+In previous studies, this was shown to lead to lower critical densities for 3- and 4-gons than an edge-forward configuration.
+
+We fix all systems studied here to a packing fraction of 25\%.
+Systems studied are all two-component systems with stoichiometries ranging from 10/90 to 90/10, and are as specified with the corresponding results.
+
+For comparison, we also studied shapes with equal side lengths.
+As has been studied elsewhere, the emergent behavior of systems is very sensitive to particle shape.
+In these equi-side shape simulations, we are able to replicate the same novel emergent behavior highlighted here.
+However, it is less reliable.
+The work here is meant to be demonstrative that there are likely to be exciting novel findings as we continue to explore shape's impact on active system emergent behavior.
+Specific emergent behavior, however, is likely to be highly depending on choice of particle shapes.
+
+
+\subsection{Calculation of steric attraction}
+
+\textbf{Bond homophily:} Bond homophily is the preference for like-like neighbor pairing of a given particle type, normalized to what would be predicted by the stoichiometry of the system.
+As an example, in a two component system with 50\%/50\% stoichiometry, if species A's neighbors are on average 55\% species A and 45\% species B, the bond homophily of species A will be $\frac{55\%}{50\%}-1=+10\%$.
+Using this same example, we see that the prior statement regarding species A's bond homophily does not give us explicit information about species B's bond homophily.
+Species B's homophily can only be calculated by looking at the neighbors of species B on average.
+Thus, we do not necessarily expect Figure \ref{fig:steric_bonds} to be symmetric.
+
+Nearest neighbors were identified using the Cluster module of the analysis package Freud \verb|2.1.0| (\verb|https://github.com/glotzerlab/freud|)\cite{freud}.
+Neighbor lists were calculated using the Freud package's implementation of an Axis-Aligned Bounding Box (AABB) tree \cite{Howard_2016_CompPhys}, with a ball query with maximum radius equal to 2.5$x$ the circumscribing radius of the largest shape and self-exclusion.
+This choice of maximum radius is sufficient to capture the first neighbor peak in our systems.
+
+\textcolor{red}{For the bond picture only:}
+Calculations were done on the final frame of each simulation over all particles in the system that had at least one other neighbor.
+This was done to capture steady-state bond preferences.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../figures/steric_attraction.pdf}
+\caption{}
+\label{fig:steric_attraction}
+\end{center}
+\end{figure}
+
+\textbf{Strength of steric attraction}: We define the ``strength of steric attraction'' as:
+\begin{equation}
+\text{Strength of steric attraction} = \frac{\Delta\text{(cluster composition)}}{\Delta\text{(bond homophily)}}
+\end{equation}
+
+Cluster composition is the fraction of each the cluster that belongs to each particle type in the two-component systems studied here.
+We calculate the cluster composition and bond homophily at 10 snapshots for each simulation, at timepoints ranging from 10$\tau$ to 5000$\tau$ (the final frame).
+We only considered clusters with at least 10 particles in the calculations.
+
+For each particle type, for each cluster, we can then plot the cluster's composition versus the average bond homophily for the given particle type in that given cluster.
+Over all simulations for a given component mix, we can then calculate a best-fit line whose slope is the impact of each incremental increase in particle type bond homophily on the cluster composition.
+We call this slope the ``steric attraction''.
+A sample system is shown in Figure \ref{fig:steric_attraction}.
+The standard error of the estimate for each calculated slope is calulated as $\sigma_\text{est}=\sqrt{\frac{\sum(Y-Y')^2}{N}}$ where $Y$ is the actual value (in this case of cluster composition), $Y'$ is the predicted value, and $N$ is the number of data points.
+
+In theory, the maximum of the slope of these linear fits should be 1.
+A slope of 1 indicates that each increase in bond homophily corresponds to a direct increase in the cluster composition.
+We might expect to see this in systems with complete species separation.
+
+\subsection{Pair correlation function}
+The pair correlation function is calculated using Ovito\cite{Ovito}.
+
+\subsection{Cluster lifetime calculations}
+\textcolor{red}{Revisit with fluidizer work.}
+
+\subsection{MSD calculations}
+Used freud
+Found sizes of clusters
+Just transcribe what's in the code
+
+% ======
+% RESULTS AND DISCUSSION
+% ======
+\section{Phase diagram}
+
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{binary-shapes/figures/main1.pdf}
+\caption{Full system snapshots (lower triangle) and snapshots of dense cluster structure (upper triangle) at each binary mixture studied. On the diagonal are the one-component systems, shown above their respective critical densities. \textcolor{red}{Swap out local density snapshots for key-colored ones.} The systems exhibiting the novel behavior discussed in this work are highlighted as follows. Green: Microphase separation. Blue: Fluidizer and shepherding behavior. Red: Three-phase steady-state. Snapshots A, B, and C are highlighted in Figure \ref{fig:examples}.}
+\label{fig:main}
+\end{center}
+\end{figure}
+
+From other work, we might have expected to see particles separate into like-like clusters.
+From our previous work, we know that structure matters a lot.
+We could have expected structure to drive the component shapes to phase separate.
+
+In higher-n one-component systems, multiple stable clusters are present at steady state (see the diagonal).
+While these multiple-cluster configurations are still seen when in combination with other high-n-gons, with 3- and 4-gons these multiple clusters condense into one to two large clusters at steady state.
+In the other direction, 3- and 4-gons both exhibit an ``oscillatory'' phase in which clusters break up and re-form, even at steady-state\cite{Moran_2020}.
+In addition to the novel behavior we see in all systems with 3- and 4-gons (a ``fluidizer'' and three-phase steady state, respectively), we can consider this condensing into few clusters a type of ``shepherding'' behavior.
+On their own, neither particle type exhibits long-lived, single cluster steady-states; but combined, this system can.
+
+This shepherding behavior is an unintuitive finding.
+Why would adding particles that form short-lived clusters to particles that rapidly form stable, long-lived clusters lead to consolidation of those stable long-lived clusters?
+In short, the dense phase motion facilitated by both the 3- and 4-gons allows for sufficient movement to merge clusters, but not so much as to break them apart.
+We will explore this ``sweet spot'' of stoichiometry and structure further in Section \ref{sec:fluidizer}.
+\textcolor{red}{In mixtures of active and passive particles, similar behavior. Talk about this.}
+
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{binary-shapes/figures/main2.pdf}
+\caption{Examples for each of the three behaviors highlighted in this work. A) Microphase behavior. B) Fluidizer behavior. C) Three-phase steady-state.}
+\label{fig:examples}
+\end{center}
+\end{figure}
+
+Open question: if we actively ``annealed'' the systems (i.e. turning on/off the active force), would we see such separation?
+
+
+\section{Microphase separation stems from shape-drive effective attraction}
+\label{sec:microphase}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{binary-shapes/figures/steric_bonds.pdf}
+\caption{Quantification of shape-drive effective interactions in mixtures.
+a) Preference for like-like bonding versus prediction from stoichiometry.
+Higher values indicate a higher likelihood of nearest neighbors being like particles, versus the prediction from stoichiometry.
+Error for each intersection is shown as the outer ring (lower bound of the standard deviation) and inner dot (upper bound of the standard deviation) of each square.
+b) Degree to which like-like bond preference drives increased like-particle cluster composition.
+The hypothetical upper value is 1.0, in which every fractional increase in like-like bond preference leads to a corresponding increase in the composition of a cluster that is like particles.
+The hypothetical lower bound should be the stoichiometry of the system, in this case 0.5 for both particles.
+As in (a), the error for each intersection is shown as the outer ring (upper bound of the standard error of the estimate) and inner dot (upper bound of the standard error of the estimate) colors.
+}
+\label{fig:steric_bonds}
+\end{center}
+\end{figure}
+
+Classical microphase separation is mediated by preferential attraction between species \cite{}.
+In the systems studied here, particles have no explicit attraction interaction and only interact via excluded volume interactions.
+However, we know that in equilibrium excluded volume interactions can lead to effective entropic ``bonding'' through such interactions\cite{entropic_bonds}.
+While the concept of equilibrium entropy-drive behavior does not map neatly onto active matter systems, we can ask if a similar shape-mediated ``attraction'' is seen in active systems.
+
+We approach this two ways.
+First, we look at the micro-scale impact of particle shape on inter-particle interaction preferences.
+In Figure \ref{fig:steric_bonds}a, we measure the preference of a particle type to bond with itself in a mixture with other particle types.
+We see that 6-gons strongly prefer neighbors of their own type when in mixtures of any other particle, up to 7\% (when in combination with 8-gons) above what would be predicted based on stoichiometry (e.g. in a system with 50/50 stoichiometry, 50\% of particle bonds would be expected to be like-like versus like-unlike).
+Interestingly, this same preferential bonding extends to the other species in the mixture with 6-gons.
+This suggests that 6-gons are uniquely able to drive steric preferences at the micro-scale.
+\textcolor{red}{But how?}
+However, phase separation, including microphase separation, is typically seen on the macroscale.
+
+Next, we look at the macro-scale impact of particle shape interaction preferences on the composition of their resident clusters.
+We can define a ``strength of steric attraction'' as:
+\begin{equation}
+\text{Strength of steric attraction} = \frac{\Delta\text{(cluster composition)}}{\Delta\text{(bond preferences)}}
+\end{equation}
+For a given cluster, we can measure the bond preference of each species and the overall composition of the species.
+Further details can be found in Section \ref{methods:steric_bonding}.
+
+We see in Figure \ref{fig:steric_bonds}b that 6-gons, in all possible system compositions, exhibit the strongest steric bonding.
+That is to say, they are most effectively able to convert microscale ``bonding'' preferences to macroscale cluster composition preferences.
+In bond preferences, we also see that 6-gons are able to effect bond preferences in their system partner.
+However, we do not see 6-gons affecting the steric attraction of their system partners.
+This difference further suggets that there is something different about the 6-gon particle ``bonds''.
+Since the bonding preference for all other $n$-gons when paired with 6-gons is likely 6-gon-mediated, that bonding preference is insufficient to drive macro cluster preferences on its own.
+
+\textcolor{red}{Why does this matter? How do 6-gons do this?}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{binary-shapes/figures/homophily_example.pdf}
+\caption{Example of what a system looks like structurally}
+\label{fig:structure}
+\end{center}
+\end{figure}
+
+We can see an example of what this macro/micro-preference difference looks like in Figure \ref{fig:structure}.
+Using a binary system of 4- and 6-gons as an example, we see a strong peak in the pair correlation function ($g(r)$, Figure \ref{fig:structure}b) for 6-6 self-bonds and a nearest-neighbor peak more than 50\% smaller for 4-4 self-bonds, with a wider tail due to 4-gons' ability to pack into an offset ``subway tiling'' (see figure inset).
+These large peaks corresponded to face-to-face packing between like particles, as would be predicted in equilibrium through entropic bonding theory\cite{entropic_bonds}.
+Likewise, the first peak in the smaller 4-6 bond correlation function corresponds to the face-to-face contact between a 4- and 6-gon.
+\textcolor{red}{What do the smaller peaks in the $g(r)$ represent? Take-away: Particles have a clear preference with themselves, not so much with each other.}
+
+In Figure \ref{fig:structure}c, we take a macro view of the system and see that the self-cluster size distributions for each shape in the system collapse onto one another.
+Literally, this means that for both shapes in the system, their distribution of the size of like-like clusters is the same.
+If we predicted that bond strength would also correspond to the size of grains of like particles, this is not what we would expect.
+Here, ``microphase'' is referring to a local
+% microphase: A relatively small-scale part of a solid phase that has a different morphology than that of its surroundings
+
+\textcolor{red}{What does this look like with equal side lengths? Different stoichiometries? This = steric bonding, cluster size distribution.}
+
+\section{Fluidizing and shepherding are driven by increased cluster motility}
+\label{sec:fluidizer}
+
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=\textwidth,height=0.25\textheight]{binary-shapes/figures/motility.pdf}
+\caption{Areas of highest motility in clusters have highest concentrations of triangles.
+Triangles provide small areas of slip planes for the cluster's particles to move along.}
+\label{fig:fluidizer}
+\end{center}
+\end{figure}
+
+\begin{itemize}
+\item Quantify the amount of motion in these clusters--> figure in first section
+\item How do triangles add motion to the clusters? --> Plasticizers “reduce interaction between molecules & improve molecular mobility”. Should see increased motion at higher triangle fractions. AREAS OF MOTION IN THE CLUSTER SHOULD BE AT POINTS WHERE THERE ARE TRIANGLES. This is the killer thing.
+\item How do triangles help shepherd these other clusters? --> average displacement of clusters, average cluster size; look at these versus triangle stoichiometry. Idea is that adding triangles will lead to fewer, larger clusters, and speed up particles outside the cluster?
+\end{itemize}
+
+Shepherding, or at least directing other particles, in active systems seems to be linked to managing the structure or speed of particles.
+
+Structure: Bryan and Dijkstra's papers both suggest that movement occurs along grain boundaries, and this facilitates annealing of defects. Areas of highest motion in the cluster are those at the highest densities of triangles.
+
+Speed: Daphne's paper showed that slow particles pile up in the cluster, while faster particles get blocked out (and form the outer edges of the cluster-- probably because they quickly re-orient and move along?). In our case, all particles are moving at the same speed. Typically, the higher-n particles have very effectively collisions, and quickly slow one another down. When in a particle mixture, though, this is not necessarily what happens. Collisions with other particles types are not necessarily as effective.
+
+So very interestingly-- triangles have this ability to both disrupt the structural stability of clusters while also using that to effectively shepherd particles into a more localized steady-state phase separated regime.
+
+% We know that 3-gons are a world of their own, and are particularly poor cluster formers.
+% In one-component systems, they form liquid clusters.
+% They rarely form large clusers, except at high density.
+% A hallmark of their phase separation behavior is the formation of smaller, unstable clusters.
+% As you add other shapes, the the shapes stabilize the cluster formation.
+% However, they can form clusters that take on a hexagonal shape, which we might expect would be an easy shape for other shapes to pack around, not significantly impacting their cluster onset.
+% This would be wrong.
+% Instead, we find that triangles are able to completely disrupt the formation of solid clusters
+
+\section{Three phase steady state possible at balance of cluster motility and ...?}
+\label{sec:threephase}
+
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{binary-shapes/figures/triple_point.pdf}
+\caption{We see the coexistence of a fluid cluster, solid cluster, and gas phase!}
+\label{fig:triple_point}
+\end{center}
+\end{figure}
+
+We can demonstrate that these phases are "solid" and "liquid" by looking at the different MSD behavior we'll see.
+Let's look at one system that is 4/5.
+
+Will these clusters always go to solids at long times?
+A good question.
+Some of these systems do go to a solid cluster only at long times.
+We do not see any examples of where the solid cluster breaks up.
+
+
+Why do some clusters become fluidizers but not others?--> stoichiometry?
+
+% ======
+% CONCLUSIONS AND OUTLOOK
+% ======
+\section{Conclusions}
+
+% 0) What we did
+In this work, we started by investigating binary systems of self-propelled polygons in equal stoichiometric ratios.
+
+% 1) What we find
+We observed three new-to-active-matter phenomena: microphase separation, fluidizer-like behavior, and a three-phase steady state.
+We additional describe previously-seen ``shepherding'' behavior, somewhat counter-intuitively, as a clear result of increased particle motility.
+
+% 2) Some future work
+We did not explore the impact of binary systems on the critical density.
+
+% 3) Where this is seen in the real world (what is the impact?)
+Our work here highlights the richness-- and the wide space of unknowns-- in designing active matter systems with novel and specific emergent phenomena.
+While we find phenomena that is robust at the systems studied, we also show that it is very sensitive to the design of such systems (both system stoichiometry and particle relative size).
+
+Our proposed framework of the active matter design space through System and Particle Design provides a structure for future exploration and continued theoretical development of the role of each design component on the Critical and Emergent Behavior found in such systems.
+As the field looks to apply computation and theoretical developments to developing tailor-made active materials, a systematic understanding of the interplay of these components will be necessary.
+
+% ======
+% SUPPLEMENTAL INFORMATION
+% ======
+\section{Supplemental Information (in main text just for review)}
+\begin{itemize}
+\item Cluster size distributions
+\item Bond strength charts
+\end{itemize}
